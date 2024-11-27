@@ -25,4 +25,9 @@ class CustomerRepsitoryImpl implements CustomerRepository {
       amountQuota: amountQuota,
     );
   }
+
+  @override
+  void payment(int idCust) {
+    // TODO: implement payment
+  }
 }

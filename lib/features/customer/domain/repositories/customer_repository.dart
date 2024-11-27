@@ -9,4 +9,6 @@ abstract interface class CustomerRepository {
   });
 
   List<Customer> getCustomers();
+
+  void payment(int idCust);
 }
