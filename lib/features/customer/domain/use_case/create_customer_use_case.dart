@@ -1,11 +1,14 @@
+import 'package:fpdart/fpdart.dart';
+import 'package:prestamo_lite/core/error/failure.dart';
+import 'package:prestamo_lite/features/customer/domain/entities/customer.dart';
 import 'package:prestamo_lite/features/customer/domain/repositories/customer_repository.dart';
 
 class CreateCustomerUseCase {
   final CustomerRepository customerRepository;
   const CreateCustomerUseCase(this.customerRepository);
 
-  void call(CreateCustomerUseCaseParams params) {
-    customerRepository.createCustomer(
+  Either<Failure, Customer> call(CreateCustomerUseCaseParams params) {
+    return customerRepository.createCustomer(
       id: params.id,
       name: params.name,
       qtyQuota: params.qtyQuota,

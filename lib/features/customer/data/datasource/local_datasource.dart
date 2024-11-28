@@ -1,39 +1,33 @@
+import 'package:prestamo_lite/core/error/exceptions.dart';
 import 'package:prestamo_lite/features/customer/data/models/customer_model.dart';
 
 abstract interface class LocalDataSource {
-  void createCustomer({
+  CustomerModel createCustomer({
     required int id,
     required String name,
     required int qtyQuota,
     required double amountQuota,
   });
-
-  List<CustomerModel> getCustomers();
 }
 
 class LocalDatasourceImpl implements LocalDataSource {
-  final List<CustomerModel> customerData;
-
-  LocalDatasourceImpl({required this.customerData});
-
   @override
-  List<CustomerModel> getCustomers() {
-    return customerData;
-  }
+  CustomerModel createCustomer(
+      {required int id,
+      required String name,
+      required int qtyQuota,
+      required double amountQuota}) {
+    try {
+      if (id == 0) {
+        throw LocalException('Id no válido!');
+      }
 
-  @override
-  void createCustomer({
-    required int id,
-    required String name,
-    required int qtyQuota,
-    required double amountQuota,
-  }) {
-    CustomerModel newCust = CustomerModel(
-      id: id,
-      name: name,
-      qtyQuota: qtyQuota,
-      amountQuota: amountQuota,
-    );
-    customerData.add(newCust);
+      CustomerModel newCust = CustomerModel(
+          id: id, name: name, qtyQuota: qtyQuota, amountQuota: amountQuota);
+
+      return newCust;
+    } catch (e) {
+      throw LocalException('No se pudo crear el cliente!');
+    }
   }
 }
