@@ -10,10 +10,21 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Iconos
   cupertino_icons: ^1.0.8
+
+  # Programación funcional
   fpdart: ^1.1.1
+
+  # Manejo de estado
   flutter_bloc: ^8.1.6
+
+  # Inyección de dependencia
   get_it: ^8.0.2
+
+  # Base de datos local
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
