@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prestamo_lite/features/customer/presentation/pages/home_page.dart';
+import 'package:prestamo_lite/home_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,6 +10,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HomePage();
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Préstamo lite v1.0.0',
+      home: HomePage(),
+    );
   }
 }
