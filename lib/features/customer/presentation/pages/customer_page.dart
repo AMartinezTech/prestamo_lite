@@ -94,15 +94,6 @@ class _CustomerPageState extends State<CustomerPage> {
         ElevatedButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              context.read<CustomerBloc>().add(
-                    CreateCustomer(
-                        id: 1,
-                        name: nameController.text.trim(),
-                        qtyQuota: int.parse(qtyQuotaController.text.trim()),
-                        amountQuota:
-                            double.parse(amountQuotaController.text.trim())),
-                  );
-
               Navigator.of(context).pop(); // Cerrar el diálogo tras guardar
             }
           },

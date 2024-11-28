@@ -14,6 +14,12 @@ final class CustomerSuccess extends CustomerState {
   const CustomerSuccess(this.customer);
 }
 
+final class CustomerList extends CustomerState {
+  final List<Customer> customers;
+
+  const CustomerList({required this.customers});
+}
+
 final class CustomerFailure extends CustomerState {
   final String message;
   const CustomerFailure(this.message);

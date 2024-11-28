@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prestamo_lite/features/customer/data/datasource/local_datasource.dart';
-import 'package:prestamo_lite/features/customer/data/repositories/customer_repsitory_impl.dart';
-import 'package:prestamo_lite/features/customer/domain/use_case/create_customer_use_case.dart';
+import 'package:prestamo_lite/core/utils/dependency_injection_container.dart';
 import 'package:prestamo_lite/features/customer/presentation/bloc/customer_bloc.dart';
 import 'package:prestamo_lite/home_page.dart';
 
-void main() {
+void main() async {
+  await initDependencyInjections();
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => CustomerBloc(
-            createCustomerUseCase: CreateCustomerUseCase(
-              CustomerRepsitoryImpl(LocalDataSource as LocalDataSource),
-            ),
-          ),
-        ),
+          create: (_) => instanceDI<CustomerBloc>(),
+        )
       ],
       child: const MainApp(),
     ),
