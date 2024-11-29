@@ -1,4 +1,4 @@
-# Flutter Clean Architecture Loan Management App
+# Préstamo lite App
 
 Este proyecto es una aplicación Flutter diseñada para gestionar préstamos a clientes, siguiendo la **Clean Architecture**.
 Incluye un enfoque modular para la escalabilidad y la mantenibilidad. La aplicación utiliza **Bloc** para el manejo del estado,
@@ -123,8 +123,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.2.0
   get_it: ^7.6.1
-
-### Reporte de Clientes
+---
+## Clonación del proyecto
 git clone https://github.com/AMartinezTech/prestamo_lite.git
 cd prestamo_lite
 
