@@ -98,6 +98,7 @@ class _CustomerPageState extends State<CustomerPage> {
                     id: 0,
                     name: nameController.text.trim(),
                     qtyQuota: int.parse(qtyQuotaController.text.trim()),
+                    paidQuota: 0,
                     amountQuota:
                         double.parse(amountQuotaController.text.trim()),
                   ));

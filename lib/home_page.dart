@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:prestamo_lite/features/customer/domain/entities/customer.dart';
+import 'package:prestamo_lite/features/customer/presentation/pages/customer_list_page.dart';
 import 'package:prestamo_lite/features/customer/presentation/utils/open_dialog_payment.dart';
 import 'package:prestamo_lite/features/customer/presentation/widgets/menu_button.dart';
 
@@ -44,7 +46,15 @@ class HomePage extends StatelessWidget {
             MenuButton(
               title: "Lista de clientes",
               subtitle: "Lista de clientes con sus saldos",
-              onButtonPressed: () {},
+              onButtonPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CustomerListPage(customers: customers()),
+                  ),
+                );
+              },
               icon: Icons.list,
               buttonText: "ver listado",
             ),
@@ -53,4 +63,54 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+List<Customer> customers() {
+  List<Customer> mockCustomers;
+
+  mockCustomers = [
+    Customer(
+      id: 1,
+      name: 'Juan Pérez',
+      qtyQuota: 12,
+      amountQuota: 1500.0,
+    ),
+    Customer(
+      id: 2,
+      name: 'Ana Rodríguez',
+      qtyQuota: 24,
+      amountQuota: 1200.0,
+    ),
+    Customer(
+      id: 3,
+      name: 'Carlos Gómez',
+      qtyQuota: 6,
+      amountQuota: 2000.0,
+    ),
+    Customer(
+      id: 4,
+      name: 'María Fernández',
+      qtyQuota: 18,
+      amountQuota: 1000.0,
+    ),
+    Customer(
+      id: 5,
+      name: 'Luis Morales',
+      qtyQuota: 36,
+      amountQuota: 800.0,
+    ),
+    Customer(
+      id: 6,
+      name: 'Luis Castillo',
+      qtyQuota: 36,
+      amountQuota: 800.0,
+    ),
+    Customer(
+      id: 7,
+      name: 'Luis De La Cruz',
+      qtyQuota: 36,
+      amountQuota: 800.0,
+    ),
+  ];
+  return mockCustomers;
 }

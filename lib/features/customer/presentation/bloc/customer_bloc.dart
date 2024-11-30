@@ -33,6 +33,7 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
       id: even.id,
       name: even.name,
       qtyQuota: even.qtyQuota,
+      paidQuota: even.paidQuota,
       amountQuota: even.amountQuota,
     );
     final resp = await _saveCustomerUseCase(customer);
