@@ -94,7 +94,15 @@ class _CustomerPageState extends State<CustomerPage> {
         ElevatedButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              Navigator.of(context).pop(); // Cerrar el diálogo tras guardar
+              context.read<CustomerBloc>().add(OnSaveCustomer(
+                    id: 0,
+                    name: nameController.text.trim(),
+                    qtyQuota: int.parse(qtyQuotaController.text.trim()),
+                    amountQuota:
+                        double.parse(amountQuotaController.text.trim()),
+                  ));
+              Navigator.of(context)
+                  .pop(); // Cerrar el diálogo despúes de guardar
             }
           },
           child: const Text("Guardar"),

@@ -29,8 +29,13 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
   void _onSaveCustomerUseCase(
       OnSaveCustomer even, Emitter<CustomerState> emit) async {
     emit(CustomerLoaging());
-
-    final resp = await _saveCustomerUseCase(even.customer);
+    Customer customer = Customer(
+      id: even.id,
+      name: even.name,
+      qtyQuota: even.qtyQuota,
+      amountQuota: even.amountQuota,
+    );
+    final resp = await _saveCustomerUseCase(customer);
 
     resp.fold(
       (failure) => emit(CustomerFailure(failure.message)),
