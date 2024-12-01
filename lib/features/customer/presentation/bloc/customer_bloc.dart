@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prestamo_lite/core/utils/random_id.dart';
 import 'package:prestamo_lite/features/customer/domain/entities/customer.dart';
 import 'package:prestamo_lite/features/customer/domain/use_case/get_all_customer_use_case.dart';
 import 'package:prestamo_lite/features/customer/domain/use_case/get_customer_by_id_use_case.dart';
@@ -30,7 +31,7 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
       OnSaveCustomer even, Emitter<CustomerState> emit) async {
     emit(CustomerLoaging());
     Customer customer = Customer(
-      id: even.id,
+      id: randomId,
       name: even.name,
       qtyQuota: even.qtyQuota,
       paidQuota: even.paidQuota,
@@ -52,7 +53,7 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
 
     resp.fold(
       (failure) => emit(CustomerFailure(failure.message)),
-      (cs) => emit(CustomerList(customers: cs)),
+      (cs) => emit(CustomerLoaded(customers: cs)),
     );
   }
 

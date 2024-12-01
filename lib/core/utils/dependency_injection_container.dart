@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+
 import 'package:prestamo_lite/features/customer/data/datasource/customer_local_datasource.dart';
 import 'package:prestamo_lite/features/customer/data/repositories/customer_repsitory_impl.dart';
 import 'package:prestamo_lite/features/customer/domain/repositories/customer_repository.dart';
@@ -10,6 +11,10 @@ import 'package:prestamo_lite/features/customer/presentation/bloc/customer_bloc.
 final instanceDI = GetIt.instance;
 
 Future<void> initDependencyInjections() async {
+  // Inicializar HiveLocalDataSourceImpl de manera asíncrona
+
+  final hiveLocalDataSource = await HiveLocalDataSourceImpl.create();
+
   // Bloc
   instanceDI.registerFactory(
     () => CustomerBloc(
@@ -41,7 +46,8 @@ Future<void> initDependencyInjections() async {
     () => CustomerRepsitoryImpl(customerLocalDataSource: instanceDI()),
   );
 
-  // DataSoure
+  // Registrar DataSource
   instanceDI.registerLazySingleton<CustomerLocalDataSource>(
-      () => HiveLocalDataSourceImpl());
+    () => hiveLocalDataSource,
+  );
 }

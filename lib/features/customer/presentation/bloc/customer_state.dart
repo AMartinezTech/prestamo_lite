@@ -14,10 +14,10 @@ final class CustomerSuccess extends CustomerState {
   const CustomerSuccess(this.customer);
 }
 
-final class CustomerList extends CustomerState {
+final class CustomerLoaded extends CustomerState {
   final List<Customer> customers;
 
-  const CustomerList({required this.customers});
+  const CustomerLoaded({required this.customers});
 }
 
 final class CustomerFailure extends CustomerState {

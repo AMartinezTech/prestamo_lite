@@ -10,17 +10,25 @@ abstract interface class CustomerLocalDataSource {
 }
 
 class HiveLocalDataSourceImpl implements CustomerLocalDataSource {
-  static const String boxName = "customers";
-  HiveLocalDataSourceImpl() {
-    Hive.initFlutter();
+  final Box<Map> _customerBox;
+
+  HiveLocalDataSourceImpl(this._customerBox);
+
+  static Future<HiveLocalDataSourceImpl> create() async {
+    final box = await Hive.openBox<Map>("customers");
+    return HiveLocalDataSourceImpl(box);
   }
 
   @override
   Future<List<CustomerModel>> getAllCustomer() async {
     try {
-      Box<dynamic> box = await Hive.openBox(boxName);
+      // Box<dynamic> box = await Hive.openBox("customers");
 
-      return box.values.map((c) => CustomerModel.fromJson(c)).toList();
+      // return  box.values.map((c) => CustomerModel.fromJson(c)).toList();
+
+      return _customerBox.values
+          .map((c) => CustomerModel.fromJson(Map<String, dynamic>.from(c)))
+          .toList();
     } catch (e) {
       throw LocalException(
         e.toString(),
@@ -31,9 +39,11 @@ class HiveLocalDataSourceImpl implements CustomerLocalDataSource {
   @override
   Future<Customer> getCustomerById(int id) async {
     try {
-      Box<dynamic> box = await Hive.openBox(boxName);
-
-      return CustomerModel.fromJson(box.get(id));
+      final customerData = _customerBox.get(id);
+      if (customerData == null) {
+        throw LocalException("Cliente con ID $id no encontrado");
+      }
+      return CustomerModel.fromJson(Map<String, dynamic>.from(customerData));
     } catch (e) {
       throw LocalException(
         e.toString(),
@@ -44,8 +54,7 @@ class HiveLocalDataSourceImpl implements CustomerLocalDataSource {
   @override
   Future<bool> saveCustomer(Customer customer) async {
     try {
-      Box<dynamic> box = await Hive.openBox(boxName);
-      box.put(
+      await _customerBox.put(
         customer.id,
         CustomerModel.fromEntity(customer).toJson(),
       );
