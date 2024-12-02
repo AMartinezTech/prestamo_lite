@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:prestamo_lite/core/common/widgets/loader.dart';
 import 'package:prestamo_lite/core/utils/show_snackbar.dart';
 import 'package:prestamo_lite/features/customer/domain/entities/customer.dart';
 import 'package:prestamo_lite/features/customer/presentation/bloc/customer_bloc.dart';
+import 'package:prestamo_lite/features/customer/presentation/widgets/card_customer_list.dart';
 
 class CustomerListPage extends StatefulWidget {
   final List<Customer> customers;
@@ -29,7 +29,7 @@ class _CustomerListPageState extends State<CustomerListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lista de clientes"),
+        title: Text("Lista de cuentas por cobrar"),
         backgroundColor: const Color.fromARGB(255, 203, 231, 175),
       ),
       body: BlocConsumer<CustomerBloc, CustomerState>(
@@ -39,111 +39,52 @@ class _CustomerListPageState extends State<CustomerListPage> {
           }
         },
         builder: (context, state) {
-          if (state is CustomerInitial) {
+          if (state is CustomerLoaging) {
             return const Loader();
           } else if (state is CustomerLoaded) {
             if (state.customers.isEmpty) {
               return Center(
-                child: Text(
-                  "Listado vacío",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.mood),
+                    Text(
+                      "No existen cuentas por cobrar pendientes",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        color: const Color.fromARGB(255, 15, 160, 34),
+                      ),
+                    )
+                  ],
                 ),
               );
             }
             return ListView.builder(
               itemCount: state.customers.length,
               itemBuilder: (context, index) {
-                return cardItem(state.customers[index]);
+                return CardCustomerList(customer: state.customers[index]);
               },
             );
           }
           return Center(
-            child: Text("Listado vacío"),
+            child: Column(
+              children: [
+                Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
+                Text(
+                  "Algo falló al cargar el listado",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: Colors.redAccent,
+                  ),
+                )
+              ],
+            ),
           );
         },
       ),
     );
   }
-}
-
-// Widget para mostrar un cliente individual
-Widget cardItem(Customer customer) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-    child: SizedBox(
-      width: 400,
-      height: 100,
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: const Color.fromARGB(255, 203, 231, 175),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    "código: ${customer.id.toString()}",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Color.fromARGB(255, 158, 158, 158),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    customer.name,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Monto cuota RD\$ ${NumberFormat("#,##0.00", "en_US").format(customer.amountQuota)}",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Color.fromARGB(255, 158, 158, 158),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  Text("Ctas. ${customer.qtyQuota.toString()}"),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Monto RD\$ ${NumberFormat("#,##0.00", "en_US").format(customer.qtyQuota * customer.amountQuota)}",
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text("Pagos ${customer.paidQuota.toString()}"),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Bce. RD\$ ${NumberFormat("#,##0.00", "en_US").format((customer.qtyQuota - customer.paidQuota) * customer.amountQuota)}",
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    ),
-  );
 }

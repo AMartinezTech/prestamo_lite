@@ -30,8 +30,10 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
   void _onSaveCustomerUseCase(
       OnSaveCustomer even, Emitter<CustomerState> emit) async {
     emit(CustomerLoaging());
+    // Evalua si viene un id, entonces actualiza el documento de lo contrario crea uno nuevo
+    int id = even.id == 0 ? randomId : even.id;
     Customer customer = Customer(
-      id: randomId,
+      id: id,
       name: even.name,
       qtyQuota: even.qtyQuota,
       paidQuota: even.paidQuota,

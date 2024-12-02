@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
           children: [
             MenuButton(
                 title: "Gestión de Clientes",
-                subtitle: "Administra el registro de tus clientes",
+                subtitle: "Administra el registro de los clientes",
                 onButtonPressed: () {
                   openDialogCustomer(context);
                 }),
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
               height: 30,
             ),
             MenuButton(
-              title: "Lista de clientes",
+              title: "Lista de cuentas por cobrar",
               subtitle: "Lista de clientes con sus saldos",
               onButtonPressed: () {
                 Navigator.push(
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                   ),
                 );
               },
-              icon: Icons.list,
+              icon: Icons.insert_chart_outlined_rounded,
               buttonText: "ver listado",
             ),
           ],
