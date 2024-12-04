@@ -14,9 +14,9 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text("Inversiones AMartínez, S.R.L."),
+          child: Text("Inversiones AMartínez, S.R.L.",
+              style: TextStyle(color: Colors.white70)),
         ),
-        backgroundColor: const Color.fromARGB(255, 203, 231, 175),
       ),
       body: Center(
         child: Column(

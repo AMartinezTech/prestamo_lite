@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prestamo_lite/core/theme/app_pallete.dart';
 
 class MenuButton extends StatelessWidget {
   final String title; // Título del ListTile
@@ -22,9 +23,9 @@ class MenuButton extends StatelessWidget {
       width: 400, // Ancho fijo
       height: 150, // Alto fijo
       child: Card(
-        elevation: 8,
+        elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: const Color.fromARGB(255, 203, 231, 175),
+        color: const Color.fromARGB(255, 240, 240, 240),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -54,13 +55,13 @@ class MenuButton extends StatelessWidget {
                   TextButton(
                     onPressed: onButtonPressed,
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all<Color>(Colors.white60),
+                      backgroundColor: WidgetStateProperty.all<Color>(
+                          AppPalette.buttonPrimary),
                     ),
                     child: Text(
                       buttonText,
                       style: const TextStyle(
-                          color: Colors.green, fontWeight: FontWeight.bold),
+                          color: Colors.white70, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ],

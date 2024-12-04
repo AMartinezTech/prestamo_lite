@@ -28,8 +28,10 @@ class _PaymentPageState extends State<PaymentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Registro de pagos"),
-        backgroundColor: const Color.fromARGB(255, 203, 231, 175),
+        title: Text(
+          "Registro de pagos",
+          style: TextStyle(color: Colors.white70),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

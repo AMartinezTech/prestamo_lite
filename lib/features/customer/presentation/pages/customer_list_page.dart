@@ -29,8 +29,18 @@ class _CustomerListPageState extends State<CustomerListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lista de cuentas por cobrar"),
-        backgroundColor: const Color.fromARGB(255, 203, 231, 175),
+        title: Text(
+          "Lista de cuentas por cobrar",
+          style: TextStyle(color: Colors.white70),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.print,
+                color: Colors.white70,
+              ))
+        ],
       ),
       body: BlocConsumer<CustomerBloc, CustomerState>(
         listener: (context, state) {

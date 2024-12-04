@@ -8,7 +8,7 @@ class GetAllCustomerUseCase {
 
   GetAllCustomerUseCase({required this.repository});
 
-  Future<Either<Failure, List<Customer>>> call() {
-    return repository.getAllCustomer();
+  Future<Either<Failure, List<Customer>>> call() async {
+    return await repository.getAllCustomer();
   }
 }

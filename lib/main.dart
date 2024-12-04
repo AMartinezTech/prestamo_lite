@@ -1,10 +1,11 @@
-// import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-// import 'package:path_provider/path_provider.dart';
+import 'package:prestamo_lite/core/common/cubits/app_user/app_user_cubit.dart';
+import 'package:prestamo_lite/core/theme/app_theme.dart';
 import 'package:prestamo_lite/core/utils/dependency_injection_container.dart';
+import 'package:prestamo_lite/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:prestamo_lite/features/auth/presentation/pages/login_page.dart';
 import 'package:prestamo_lite/features/customer/presentation/bloc/customer_bloc.dart';
 import 'package:prestamo_lite/home_page.dart';
 
@@ -25,6 +26,12 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (_) => instanceDI<AppUserCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => instanceDI<AuthBloc>(),
+        ),
+        BlocProvider(
           create: (_) => instanceDI<CustomerBloc>(),
         )
       ],
@@ -43,10 +50,21 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MaterialApp(
       title: 'Préstamo lite v1.0.0',
-      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.themeMode,
+      home: BlocSelector<AppUserCubit, AppUserState, bool>(
+        selector: (state) {
+          return state is AppUserLoggedIn;
+        },
+        builder: (context, isLoggedIn) {
+          if (isLoggedIn) {
+            return HomePage();
+          }
+          return const LoginPage();
+        },
+      ),
     );
   }
 }
