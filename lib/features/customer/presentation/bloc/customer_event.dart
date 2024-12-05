@@ -8,14 +8,14 @@ final class OnSaveCustomer extends CustomerEvent {
   final String name;
   final int qtyQuota;
   final int paidQuota;
-  final double amountQuota;
+  final double amountLoan;
 
   OnSaveCustomer({
     required this.id,
     required this.name,
     required this.qtyQuota,
     required this.paidQuota,
-    required this.amountQuota,
+    required this.amountLoan,
   });
 }
 

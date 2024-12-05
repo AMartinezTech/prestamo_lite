@@ -15,8 +15,17 @@ class CustomerPage extends StatefulWidget {
 class _CustomerPageState extends State<CustomerPage> {
   final nameController = TextEditingController();
   final qtyQuotaController = TextEditingController();
-  final amountQuotaController = TextEditingController();
+  final amountLoanController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    qtyQuotaController.dispose();
+    amountLoanController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +74,8 @@ class _CustomerPageState extends State<CustomerPage> {
                   ),
                   const SizedBox(height: 15),
                   CustomField(
-                    hintText: "Monto de cuotas",
-                    controller: amountQuotaController,
+                    hintText: "Monto del préstamo",
+                    controller: amountLoanController,
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -99,8 +108,7 @@ class _CustomerPageState extends State<CustomerPage> {
                     name: nameController.text.trim(),
                     qtyQuota: int.parse(qtyQuotaController.text.trim()),
                     paidQuota: 0,
-                    amountQuota:
-                        double.parse(amountQuotaController.text.trim()),
+                    amountLoan: double.parse(amountLoanController.text.trim()),
                   ));
               Navigator.of(context)
                   .pop(); // Cerrar el diálogo despúes de guardar

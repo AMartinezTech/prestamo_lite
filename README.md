@@ -1,7 +1,7 @@
 # Préstamo lite App
 
-Este proyecto es una aplicación Flutter diseñada para gestionar préstamos a clientes, siguiendo la **Clean Architecture**.
-Incluye un enfoque modular para la escalabilidad y la mantenibilidad. La aplicación utiliza **Bloc** para el manejo del estado,
+Este proyecto es una aplicación Flutter diseñada para gestionar préstamos a clientes, siguiendo la arquitetura **Clean Architecture**.
+Incluye un enfoque modular para la escalabilidad y la mantenibilidad. La aplicación utiliza **Bloc** para el manejo del estado de dicha aplicación,
 **Hive** para la persistencia de datos, **inyección de dependencias con get_it**, y **fpdart** para la programación funcional.
 
 ## Autor

@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prestamo_lite/core/common/widgets/loader.dart';
 import 'package:prestamo_lite/core/utils/show_snackbar.dart';
-import 'package:prestamo_lite/features/customer/domain/entities/customer.dart';
 import 'package:prestamo_lite/features/customer/presentation/bloc/customer_bloc.dart';
 import 'package:prestamo_lite/features/customer/presentation/widgets/card_customer_list.dart';
 
 class CustomerListPage extends StatefulWidget {
-  final List<Customer> customers;
   const CustomerListPage({
     super.key,
-    required this.customers,
   });
 
   @override
@@ -33,14 +30,6 @@ class _CustomerListPageState extends State<CustomerListPage> {
           "Lista de cuentas por cobrar",
           style: TextStyle(color: Colors.white70),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.print,
-                color: Colors.white70,
-              ))
-        ],
       ),
       body: BlocConsumer<CustomerBloc, CustomerState>(
         listener: (context, state) {

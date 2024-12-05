@@ -38,7 +38,7 @@ class CardCustomerList extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      "Monto Prest. RD\$ ${NumberFormat("#,##0.00", "en_US").format(customer.qtyQuota * customer.amountQuota)}",
+                      "Monto Prest. RD\$ ${NumberFormat("#,##0.00", "en_US").format(customer.amountLoan)}",
                       style: const TextStyle(
                         fontSize: 14,
                         color: Color.fromARGB(255, 158, 158, 158),
@@ -54,7 +54,7 @@ class CardCustomerList extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  "Monto de cuotas: RD\$ ${NumberFormat("#,##0.00", "en_US").format(customer.amountQuota)}",
+                  "Monto de cuotas: RD\$ ${NumberFormat("#,##0.00", "en_US").format(customer.amountLoan / customer.qtyQuota)}",
                 ),
                 Divider(),
                 Row(
@@ -67,7 +67,7 @@ class CardCustomerList extends StatelessWidget {
                           fontWeight: FontWeight.w800),
                     ),
                     Text(
-                      "balance: RD\$ ${NumberFormat("#,##0.00", "en_US").format((customer.qtyQuota - customer.paidQuota) * customer.amountQuota)}",
+                      "balance: RD\$ ${NumberFormat("#,##0.00", "en_US").format((customer.qtyQuota - customer.paidQuota) * (customer.amountLoan / customer.qtyQuota))}",
                       style: TextStyle(
                           fontWeight: FontWeight.w800, color: Colors.redAccent),
                     ),

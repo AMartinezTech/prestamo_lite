@@ -6,7 +6,7 @@ class CustomerModel extends Customer {
     required super.name,
     required super.qtyQuota,
     required super.paidQuota,
-    required super.amountQuota,
+    required super.amountLoan,
   });
 
   factory CustomerModel.fromJson(Map<String, dynamic> map) {
@@ -15,7 +15,7 @@ class CustomerModel extends Customer {
       name: map['name'],
       qtyQuota: map['qtyQuota'],
       paidQuota: map['paidQuota'],
-      amountQuota: map['amountQuota'],
+      amountLoan: map['amountQuota'],
     );
   }
 
@@ -25,7 +25,7 @@ class CustomerModel extends Customer {
       'name': name,
       'qtyQuota': qtyQuota,
       'paidQuota': paidQuota,
-      'amountQuota': amountQuota,
+      'amountQuota': amountLoan,
     };
   }
 
@@ -35,7 +35,7 @@ class CustomerModel extends Customer {
       name: customer.name,
       qtyQuota: customer.qtyQuota,
       paidQuota: customer.paidQuota,
-      amountQuota: customer.amountQuota,
+      amountLoan: customer.amountLoan,
     );
   }
 }

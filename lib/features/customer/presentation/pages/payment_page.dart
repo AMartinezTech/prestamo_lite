@@ -33,29 +33,6 @@ class _PaymentPageState extends State<PaymentPage> {
           style: TextStyle(color: Colors.white70),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (_selectedCustomer!.qtyQuota - _selectedCustomer!.paidQuota == 0) {
-            showSnackBar(context, "Éste cliente no tiene saldo pendiente");
-            return;
-          }
-          if (_selectedCustomer != null) {
-            context.read<CustomerBloc>().add(OnSaveCustomer(
-                  id: _selectedCustomer!.id,
-                  name: _selectedCustomer!.name,
-                  qtyQuota: _selectedCustomer!.qtyQuota,
-                  paidQuota: _selectedCustomer!.paidQuota + 1,
-                  amountQuota: _selectedCustomer!.amountQuota,
-                ));
-            showSnackBar(context, "pago realizado con exito");
-            Navigator.pop(context);
-          } else {
-            showSnackBar(context, "Seleccione un cliente.");
-          }
-        },
-        tooltip: "Aplicar pago",
-        child: Icon(Icons.payment),
-      ),
       body: BlocConsumer<CustomerBloc, CustomerState>(
         listener: (context, state) {
           if (state is CustomerFailure) {
